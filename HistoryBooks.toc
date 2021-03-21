@@ -1,0 +1,27 @@
+## Title: History Books
+## Version: 0.0.1
+## Author: Grawr
+## Interface: 90002
+## SavedVariablesPerCharacter: HistoryBooksDatabase
+
+# Utilities
+Util\Configuration.lua
+Util\Logger.lua
+
+# Tracked activities
+Activities\Arena.lua
+Activities\Battleground.lua
+Activities\Dungeon.lua
+Activities\Raid.lua
+
+# Data manipulation/storage
+Data\Database.lua
+
+# User interaction handling
+Interaction\SlashCommands.lua
+
+# Event handling
+Events.lua
+
+# Main entry point
+Main.lua

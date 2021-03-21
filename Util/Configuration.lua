@@ -1,0 +1,3 @@
+HBConfiguration = {
+    DebuggingEnabled = true
+}
