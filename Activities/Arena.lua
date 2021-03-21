@@ -14,7 +14,20 @@ end
 local function SaveCurrentMatch()
     local currentMatch = HBArena.CurrentMatch
     if (currentMatch) then
-        logger.log("Saving arena match: " .. currentMatch)
+        currentMatch.winningSide = GetBattlefieldWinner()
+        if (currentMatch.winningSide == currentMatch.playerSide) then
+            currentMatch.playerWon = true
+        end
+
+        currentMatch.players = {}
+        for i=1, GetNumBattlefieldScores() do
+            tinsert(currentMatch.players, { GetBattlefieldScore(i) })
+        end
+
+        currentMatch.endTime = time()
+        
+        logger.log("Saving arena match:")
+        logger.log(currentMatch)
         HBArena.CurrentMatch = nil
         HBArena.History.append(currentMatch)
     end
@@ -32,13 +45,17 @@ end
 
 
 local function TrackNewMatch()
-    SaveCurrentMatch()
     if not IsInArena() then return end
     -- local name, instanceType, difficultyID, difficultyName, maxPlayers, dynamicDifficulty, isDynamic, instanceID, instanceGroupSize, LfgDungeonID = GetInstanceInfo()
     local instanceID = select(8, GetInstanceInfo())
+    local _, isRated = IsActiveBattlefieldArena()
     local currentMatch = { 
-        timestamp = time(),
+        enterTime = time(), -- TODO Start time?
         instanceID = instanceID,
+        isBrawl = C_PvP.IsInBrawl,
+        isOver = false,
+        isRated = isRated,
+        playerSide = GetBattlefieldArenaFaction(),
         season = GetCurrentArenaSeason(),
      }
      logger.log("Tracking new arena match: ")
