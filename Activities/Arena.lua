@@ -63,6 +63,22 @@ local function OnZoneChanged()
     end
 end
 
+local function DisableLeaveArenaButton()
+    _G.PVPMatchResults.buttonContainer.leaveButton:Disable()
+end
+
+local function EnableLeaveArenaButton()
+    _G.PVPMatchResults.buttonContainer.leaveButton:Enable()
+end
+
+local function OnMatchCompleted()
+    if (HBArena.CurrentMatch == nil or HBArena.CurrentMatch.isOver) then return end
+    HBArena.CurrentMatch.isOver = true
+    DisableLeaveArenaButton()
+    C_Timer.After(1, SaveCurrentMatch)
+    C_Timer.After(1, EnableLeaveArenaButton)
+end
+
 -- TODO Handle disconnects when in an arena
 -- local function OnPlayerEnteringWorld(...)
 --     logger.log("Arena - On player entered world.")
@@ -78,6 +94,8 @@ end
 function HBArena:RegisterEvents()
     logger.log("Registering for arena events")
     HistoryBooksEvents:RegisterEventHandler("ZONE_CHANGED_NEW_AREA", OnZoneChanged, "Arena_OnZoneChanged")
+    HistoryBooksEvents:RegisterEventHandler("PVP_MATCH_COMPLETE", OnMatchCompleted, "Arena_OnMatchCompleted")
+
     -- HistoryBooksEvents:RegisterEventHandler("PLAYER_ENTERING_WORLD", OnPlayerEnteringWorld, "Arena_OnPlayerEnteringWorld")
     -- HistoryBooksEvents:RegisterEventHandler("ARENA_PREP_OPPONENT_SPECIALIZATIONS", OnArenaOpponentSpecs, "Arena_OnArenaOpponentSpecs")    
 end
