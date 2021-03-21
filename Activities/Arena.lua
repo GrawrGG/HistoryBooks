@@ -20,6 +20,17 @@ local function SaveCurrentMatch()
     end
 end
 
+local function AbandonCurrentMatch()
+    local currentMatch = HBArena.CurrentMatch
+    if (currentMatch) then
+        logger.log("Saving abandoned arena match:")
+        logger.log(currentMatch)
+        HBArena.CurrentMatch = nil
+        HBArena.History.append(currentMatch)
+    end
+end
+
+
 local function TrackNewMatch()
     SaveCurrentMatch()
     if not IsInArena() then return end
@@ -30,7 +41,8 @@ local function TrackNewMatch()
         instanceID = instanceID,
         season = GetCurrentArenaSeason(),
      }
-     logger.log("Tracking new arena match: " .. currentMatch)
+     logger.log("Tracking new arena match: ")
+     logger.log(currentMatch)
      HBArena.CurrentMatch = currentMatch
 end
 
@@ -40,12 +52,12 @@ end
 
 local function OnZoneChanged()
     logger.log("Arena - On zone changed")
-    if IsInArena() then
+    if IsTrackingMatch() and not IsInArena() then
+        logger.log("Arena - zone change - current match deserted")
+        AbandonCurrentMatch()
+    elseif IsInArena() then
         logger.log("Arena - zone change - tracking new match")
         TrackNewMatch()
-    elseif IsTrackingMatch() then
-        logger.log("Arena - zone change - saving current match")
-        SaveCurrentMatch()
     else
         logger.log("Arena - zone change - doing nothing")
     end
