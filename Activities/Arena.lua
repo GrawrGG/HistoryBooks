@@ -52,7 +52,7 @@ local function TrackNewMatch()
     local currentMatch = { 
         enterTime = time(), -- TODO Start time?
         instanceID = instanceID,
-        isBrawl = C_PvP.IsInBrawl,
+        isBrawl = C_PvP.IsInBrawl(),
         isOver = false,
         isRated = isRated,
         playerSide = GetBattlefieldArenaFaction(),
