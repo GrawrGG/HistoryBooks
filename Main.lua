@@ -1,4 +1,3 @@
-local arena, bg, dungeon, raid
 local logger = HBLogger
 
 local function InitDb()
@@ -16,10 +15,10 @@ end
 
 local function RegisterEvents()
     logger.log("HB: RegisterEvents")
-    arena:RegisterEvents()
-    bg:RegisterEvents()
-    dungeon:RegisterEvents()
-    raid:RegisterEvents()
+    HBArena:RegisterEvents()
+    HBBattleground:RegisterEvents()
+    HBDungeon:RegisterEvents()
+    HBRaid:RegisterEvents()
     HistoryBooksEvents:RegisterEventHandler("ADDON_LOADED", OnAddonLoaded, "HBMain_OnAddonLoaded")
 end
 
@@ -30,7 +29,6 @@ end
 
 local function Init()
     logger.log("Initialising HistoryBooks addon")
-    arena, bg, dungeon, raid = HBArena, HBBattleground, HBDungeon, HBRaid
     RegisterEvents()
     RegisterSlashCmds()
     logger.log("Finished initialising HistoryBooks.")
