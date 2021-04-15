@@ -18,6 +18,18 @@ function HistoryBooksEvents:RegisterEventHandler(event, handler, id)
     HistoryBooksEvents:RegisterEvent(event)
 end
 
+function HistoryBooksEvents:UnregisterEventHandler(event, id)
+    logger.log("Unregistering event handler for " .. event)
+    local handlers = eventHandlers[event]
+    if (handlers) then
+        handlers[id] = nil
+        if next(handlers) == nil then
+            -- No event handlers left, let's stop listening
+            HistoryBooksEvents:UnregisterEvent(event)
+        end
+    end
+end
+
 function HistoryBooksEvents:HandleEvent(event, ...)
     logger.log("Handling event " .. event)
     local handlers = eventHandlers[event]
