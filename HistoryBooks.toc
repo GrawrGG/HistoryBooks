@@ -2,7 +2,7 @@
 ## Version: 0.0.1
 ## Author: Grawr
 ## Interface: 90002
-## SavedVariablesPerCharacter: HistoryBooksDatabase
+## SavedVariablesPerCharacter: HBDBFile
 
 # Utilities
 Util\Configuration.lua
