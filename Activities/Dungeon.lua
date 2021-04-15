@@ -6,19 +6,20 @@ HBDungeon = {
 
 local function OnChallengeModeStart()
     logger.log("Challenge mode started!")
-    local _, _, _, _, _, _, _, instanceId = GetInstanceInfo()
+    -- id across all instances. eg 2290 is Plaguefall
+    local _, _, _, _, _, _, _, instanceId = GetInstanceInfo() 
+    -- M+ instances only. 329 is Plaguefall. C_ChallengeMode.GetMapUIInfo to get timelimit, textures, etc.
+    local mapId = C_ChallengeMode.GetActiveChallengeMapID() 
     local keyLevel, affixes = C_ChallengeMode.GetActiveKeystoneInfo()
-    -- TODO How is mapId different to instance ID?
-    local mapId = C_ChallengeMode.GetActiveChallengeMapID()
-    local instanceName, _, keyTimeLimit = C_ChallengeMode.GetMapUIInfo(mapId)
+    local instanceName, _, keyTimeLimitSeconds = C_ChallengeMode.GetMapUIInfo(mapId)
   
     local currentInstance = {
         affixes = affixes,
         instanceId = instanceId,
         instanceName = instanceName,
-        enterTime = time(), -- TODO Start time?
+        enterTime = time(), -- in seconds
         keyLevel = keyLevel,
-        keyTimeLimit = keyTimeLimit,
+        keyTimeLimitSeconds = keyTimeLimitSeconds,
         mapId = mapId,
         isComplete = false,
     }
