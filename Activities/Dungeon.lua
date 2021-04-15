@@ -39,7 +39,7 @@ local function OnChallengeModeComplete()
         logger.log("Saving completed dungeon:")
         logger.log(dungeon)
         HBDungeon.CurrentInstance = nil
-        tinsert(HBDungeon.History, currentInstance)
+        HBDatabase:SaveDungeon(currentInstance)
     end
 end
 
@@ -53,7 +53,7 @@ local function OnChallengeModeReset()
         logger.log("Saving incomplete dungeon:")
         logger.log(dungeon)
         HBDungeon.CurrentInstance = nil
-        tinsert(HBDungeon.History, currentInstance)
+        HBDatabase:SaveDungeon(currentInstance)
     end
 end
 

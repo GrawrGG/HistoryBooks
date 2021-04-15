@@ -29,7 +29,7 @@ local function SaveCurrentMatch()
         logger.log("Saving arena match:")
         logger.log(currentMatch)
         HBArena.CurrentMatch = nil
-        HBArena.History.append(currentMatch)
+        HBDatabase:SaveArena(currentMatch)
     end
 end
 
