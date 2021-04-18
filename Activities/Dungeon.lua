@@ -6,10 +6,12 @@ HBDungeon = {
 
 local function OnChallengeModeStart()
     logger.log("Challenge mode started!")
-    -- id across all instances. eg 2290 is Plaguefall
-    local _, _, _, _, _, _, _, instanceId = GetInstanceInfo() 
     -- M+ instances only. 329 is Plaguefall. C_ChallengeMode.GetMapUIInfo to get timelimit, textures, etc.
     local mapId = C_ChallengeMode.GetActiveChallengeMapID() 
+    -- Sometimes the map didn't finish loading yet. We'll get another CHALLENGE_MODE_START event.
+    if mapId == nil then return end
+    -- id across all instances. eg 2290 is Plaguefall
+    local _, _, _, _, _, _, _, instanceId = GetInstanceInfo() 
     local keyLevel, affixes = C_ChallengeMode.GetActiveKeystoneInfo()
     local instanceName, _, keyTimeLimitSeconds = C_ChallengeMode.GetMapUIInfo(mapId)
   
