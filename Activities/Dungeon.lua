@@ -9,7 +9,10 @@ local function OnChallengeModeStart()
     -- M+ instances only. 329 is Plaguefall. C_ChallengeMode.GetMapUIInfo to get timelimit, textures, etc.
     local mapId = C_ChallengeMode.GetActiveChallengeMapID() 
     -- Sometimes the map didn't finish loading yet. We'll get another CHALLENGE_MODE_START event.
-    if mapId == nil then return end
+    if mapId == nil then
+        logger.log("Challenge mode started without map id. Aborting.")
+        return 
+    end
     -- id across all instances. eg 2290 is Plaguefall
     local _, _, _, _, _, _, _, instanceId = GetInstanceInfo() 
     local keyLevel, affixes = C_ChallengeMode.GetActiveKeystoneInfo()
