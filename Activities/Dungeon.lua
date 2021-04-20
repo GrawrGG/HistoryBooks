@@ -37,6 +37,7 @@ local function OnChallengeModeComplete()
     logger.log("Challenge mode complete.")
     local currentInstance = HBDungeon.CurrentInstance
     if (currentInstance and not currentInstance.isComplete) then
+        currentInstance.isComplete = true
         currentInstance.finishTime = time()
         currentInstance.didFinish = true -- Did complete dungeon
         local success = (currentInstance.finishTime - currentInstance.enterTime) > currentInstance.keyTimeLimit
@@ -52,6 +53,7 @@ local function OnChallengeModeReset()
     logger.log("Challenge mode reset.")
     local currentInstance = HBDungeon.CurrentInstance
     if (currentInstance and not currentInstance.isComplete) then
+        currentInstance.isComplete = true
         currentInstance.finishTime = time()
         currentInstance.didFinish = false -- Did not complete dungeon
         currentInstance.success = false -- Did not beat timer
