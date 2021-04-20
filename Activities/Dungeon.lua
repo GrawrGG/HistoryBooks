@@ -41,7 +41,7 @@ local function OnChallengeModeComplete()
         currentInstance.finishTime = time()
         currentInstance.didFinish = true -- Did complete dungeon
         local success = (currentInstance.finishTime - currentInstance.enterTime) > currentInstance.keyTimeLimitSeconds
-        currentInstanced.success = success -- Did we beat the timer?
+        currentInstance.success = success -- Did we beat the timer?
         logger.log("Saving completed dungeon:")
         logger.log(dungeon)
         HBDungeon.CurrentInstance = nil
