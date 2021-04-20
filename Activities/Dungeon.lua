@@ -40,7 +40,7 @@ local function OnChallengeModeComplete()
         currentInstance.isComplete = true
         currentInstance.finishTime = time()
         currentInstance.didFinish = true -- Did complete dungeon
-        local success = (currentInstance.finishTime - currentInstance.enterTime) > currentInstance.keyTimeLimit
+        local success = (currentInstance.finishTime - currentInstance.enterTime) > currentInstance.keyTimeLimitSeconds
         currentInstanced.success = success -- Did we beat the timer?
         logger.log("Saving completed dungeon:")
         logger.log(dungeon)
