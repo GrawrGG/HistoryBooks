@@ -4,6 +4,9 @@
 ## Interface: 90002
 ## SavedVariablesPerCharacter: HBDBFile
 
+# Libraries
+Embeds.xml
+
 # Utilities
 Util\Configuration.lua
 Util\Logger.lua
