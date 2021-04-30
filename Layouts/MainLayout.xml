@@ -17,5 +17,14 @@
 		<Anchors>
 			<Anchor point="CENTER" />
 		</Anchors>
+		<Frames>
+			<Frame parentKey="Content">
+				<Size x="794" y="500" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="3" y="-38"/>
+					<Anchor point="BOTTOMRIGHT" x="-3" y="0"/>
+				</Anchors>
+			</Frame>
+		</Frames>
     </Frame>
 </Ui>

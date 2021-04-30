@@ -28,3 +28,8 @@ Events.lua
 
 # Main entry point
 Main.lua
+
+# UI
+Layouts\DungeonLayout.lua
+Layouts\MainLayout.lua
+Layouts\MainLayout.xml

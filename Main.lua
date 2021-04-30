@@ -5,11 +5,16 @@ local function InitDb()
     HBDatabase:Init()
 end
 
+local function InitUi()
+    HBMainLayout:Setup()
+end
+
 local function OnAddonLoaded(addonName)
     if (addonName == "HistoryBooks") then
         HistoryBooksEvents:UnregisterEventHandler("ADDON_LOADED", "HBMain_OnAddonLoaded")
         logger.log("HB: Addon loaded.")
         InitDb()
+        InitUi()
     end
 end
 
