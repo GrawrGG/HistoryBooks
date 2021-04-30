@@ -3,7 +3,7 @@ local locals = {}
 
 local function PrintHelp()
     print("History Books slash commands:")
-    print("/hb -- prints this help")
+    print("/hb help (?) -- prints this help")
     print("/hb arena -- prints arena history")
     print("/hb battlegrounds (bg) -- prints battlegrounds history")
     print("/hb dungeon (mythic, mp) -- prints dungeon history")
@@ -35,8 +35,14 @@ local function HandleHBSlashCmd(msg)
         PrintDungeon()        
     elseif msg == "raid" then
         PrintRaid()
-    elseif msg == "help" or strlen(msg) == 0 then
+    elseif msg == "help" or msg == "?" then
         PrintHelp()
+    elseif strlen(msg) == 0 then
+        if (HBFrame:IsVisible()) then
+            HBFrame:Hide()
+        else 
+            HBFrame:Show()
+        end
     end
 end
 

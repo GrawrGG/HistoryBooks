@@ -1,0 +1,21 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\..\FrameXML\UI.xsd">
+    <Frame name="HBFrame" inherits="BasicFrameTemplate" resizable="true" movable="true" hidden="true" parent="UIParent">
+        <Scripts>
+            <OnLoad>
+                tinsert(UISpecialFrames, "HBFrame");
+				self:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing();
+			</OnDragStop>
+        </Scripts>
+        <!-- Same size as Auction House UI -->
+        <Size x="800" y="538" />
+		<Anchors>
+			<Anchor point="CENTER" />
+		</Anchors>
+    </Frame>
+</Ui>
