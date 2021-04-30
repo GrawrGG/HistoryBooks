@@ -110,11 +110,11 @@ end
 
 function HBArena:RegisterEvents()
     logger.log("Registering for arena events")
-    HistoryBooksEvents:RegisterEventHandler("ZONE_CHANGED_NEW_AREA", OnZoneChanged, "Arena_OnZoneChanged")
-    HistoryBooksEvents:RegisterEventHandler("PVP_MATCH_COMPLETE", OnMatchCompleted, "Arena_OnMatchCompleted")
+    HBEvents:RegisterEventHandler("ZONE_CHANGED_NEW_AREA", OnZoneChanged, "Arena_OnZoneChanged")
+    HBEvents:RegisterEventHandler("PVP_MATCH_COMPLETE", OnMatchCompleted, "Arena_OnMatchCompleted")
 
-    -- HistoryBooksEvents:RegisterEventHandler("PLAYER_ENTERING_WORLD", OnPlayerEnteringWorld, "Arena_OnPlayerEnteringWorld")
-    -- HistoryBooksEvents:RegisterEventHandler("ARENA_PREP_OPPONENT_SPECIALIZATIONS", OnArenaOpponentSpecs, "Arena_OnArenaOpponentSpecs")    
+    -- HBEvents:RegisterEventHandler("PLAYER_ENTERING_WORLD", OnPlayerEnteringWorld, "Arena_OnPlayerEnteringWorld")
+    -- HBEvents:RegisterEventHandler("ARENA_PREP_OPPONENT_SPECIALIZATIONS", OnArenaOpponentSpecs, "Arena_OnArenaOpponentSpecs")    
 end
 
 --[[

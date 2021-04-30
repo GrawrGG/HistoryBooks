@@ -66,7 +66,7 @@ end
 
 function HBDungeon:RegisterEvents()
     logger.log("Registering for dungeon events")
-    HistoryBooksEvents:RegisterEventHandler("CHALLENGE_MODE_START", OnChallengeModeStart, "Dungeon_OnChallengeModeStart")
-    HistoryBooksEvents:RegisterEventHandler("CHALLENGE_MODE_COMPLETED", OnChallengeModeComplete, "Dungeon_OnChallengeModeCompleted")
-    HistoryBooksEvents:RegisterEventHandler("CHALLENGE_MODE_RESET", OnChallengeModeReset, "Dungeon_OnChallengeModeReset")
+    HBEvents:RegisterEventHandler("CHALLENGE_MODE_START", OnChallengeModeStart, "Dungeon_OnChallengeModeStart")
+    HBEvents:RegisterEventHandler("CHALLENGE_MODE_COMPLETED", OnChallengeModeComplete, "Dungeon_OnChallengeModeCompleted")
+    HBEvents:RegisterEventHandler("CHALLENGE_MODE_RESET", OnChallengeModeReset, "Dungeon_OnChallengeModeReset")
 end

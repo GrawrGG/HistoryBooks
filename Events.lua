@@ -1,10 +1,10 @@
 local logger = HBLogger
 
-HistoryBooksEvents = CreateFrame("FRAME", "HistoryBooks")
+HBEvents = CreateFrame("FRAME", "HistoryBooks")
 local eventHandlers = {}
 
 -- Because we can have multiple handlers for the same event, we provide a unique ID for each handler.
-function HistoryBooksEvents:RegisterEventHandler(event, handler, id)
+function HBEvents:RegisterEventHandler(event, handler, id)
     logger.log("Registering event handler for " .. event)
     local handlers = eventHandlers[event]
     if (handlers == nil) then
@@ -15,22 +15,22 @@ function HistoryBooksEvents:RegisterEventHandler(event, handler, id)
         logger.log("Replacing existing event handler for " .. event .. " with ID " .. id)
     end
     handlers[id] = handler
-    HistoryBooksEvents:RegisterEvent(event)
+    HBEvents:RegisterEvent(event)
 end
 
-function HistoryBooksEvents:UnregisterEventHandler(event, id)
+function HBEvents:UnregisterEventHandler(event, id)
     logger.log("Unregistering event handler for " .. event)
     local handlers = eventHandlers[event]
     if (handlers) then
         handlers[id] = nil
         if next(handlers) == nil then
             -- No event handlers left, let's stop listening
-            HistoryBooksEvents:UnregisterEvent(event)
+            HBEvents:UnregisterEvent(event)
         end
     end
 end
 
-function HistoryBooksEvents:HandleEvent(event, ...)
+function HBEvents:HandleEvent(event, ...)
     logger.log("Handling event " .. event)
     local handlers = eventHandlers[event]
     if (handlers == nil) then
@@ -42,4 +42,4 @@ function HistoryBooksEvents:HandleEvent(event, ...)
     end
 end
 
-HistoryBooksEvents:SetScript("OnEvent", HistoryBooksEvents.HandleEvent)
+HBEvents:SetScript("OnEvent", HBEvents.HandleEvent)
