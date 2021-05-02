@@ -38,11 +38,7 @@ local function HandleHBSlashCmd(msg)
     elseif msg == "help" or msg == "?" then
         PrintHelp()
     elseif strlen(msg) == 0 then
-        if (HBFrame:IsVisible()) then
-            HBFrame:Hide()
-        else 
-            HBFrame:Show()
-        end
+        HBMainLayout:ToggleVisible()
     end
 end
 
