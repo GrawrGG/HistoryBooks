@@ -1,9 +1,11 @@
-HBMainLayout = {}
-
+-- Constants
 local NUM_TABS = 2 -- Dungeons, Arenas
 local DEFAULT_TAB = 1 -- Dungeons
 
+-- Locals
 local logger = HBLogger
+
+HBMainLayout = {}
 
 local function SetTitle()
     HBFrame.TitleText:SetText("History Books")
