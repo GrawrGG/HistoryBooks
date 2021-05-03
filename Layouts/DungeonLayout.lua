@@ -117,7 +117,9 @@ function HBDungeonLayout:Show()
     if (rows == nil) then
         rows = {}
         local history = HBDatabase:DungeonHistory()
-        for _, dungeon in ipairs(history) do
+        -- Iterate backwards over history to create our rows as 'most recent first'
+        for i = #history, 1, -1 do
+            local dungeon = history[i]
             tinsert(rows, CreateRowData(dungeon))
         end
         dungeonTable:SetData(rows)
