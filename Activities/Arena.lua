@@ -19,8 +19,12 @@ local function SaveCurrentMatch()
         end
 
         currentMatch.players = {}
-        for i=1, GetNumBattlefieldScores() do
-            tinsert(currentMatch.players, { GetBattlefieldScore(i) })
+        local numPlayers = GetNumBattlefieldScores()
+        for i=1, numPlayers do
+            local playerInfo = { GetBattlefieldScore(i) }
+            logger.log("Adding arena player:")
+            logger.log(playerInfo)
+            tinsert(currentMatch.players, playerInfo)
         end
 
         currentMatch.endTime = time()
