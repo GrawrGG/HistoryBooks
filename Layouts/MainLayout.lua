@@ -1,6 +1,11 @@
 HBMainLayout = {}
 
+local function SetTitle()
+    HBFrame.TitleText:SetText("History Books")
+end
+
 function HBMainLayout:Setup()
+    SetTitle()
     HBDungeonLayout:Setup(HBFrame.Content)
 end
 
