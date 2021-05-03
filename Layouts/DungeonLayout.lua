@@ -51,61 +51,72 @@ local function GetDungeonName(dungeonID)
     return dungeonName
 end
 
-local function CreateRowData(dungeonID, duration, didTime)
+local function GetDungeonTimeColor(didCompleteInTime)
+    local red, green = 0.0, 0.0
+    if didCompleteInTime then 
+        green = 1.0
+    else 
+        red = 1.0
+    end
+    return { 
+        ["r"] = red,
+        ["g"] = green,
+        ["b"] = 0.0,
+        ["a"] = 1.0,
+    }
+end
+
+local function GetDungeonTime(duration)
+    -- TODO Format duration in hours:mins:seconds
+    return duration
+end
+
+local function CreateRowData(dungeon)
+    local mapId = dungeon.mapId
+    local duration = dungeon.finishTime - dungeon.enterTime
     return {
         ["cols"] = {
             [COL_INDEX_ICON] = {
-                ["value"] = dungeonID,
+                ["value"] = mapId,
                 ["DoCellUpdate"] = SetDungeonIcon
             },
             [COL_INDEX_NAME] = {
                 ["value"] = GetDungeonName,
-                ["args"] = {dungeonID}
+                ["args"] = {mapId}
             },
             [COL_INDEX_TIME] = {
-                ["value"] = duration
+                ["value"] = GetDungeonTime,
+                ["args"] = { duration },
+                ["color"] = GetDungeonTimeColor,
+                ["colorargs"] = { dungeon.success }
             }
-        }
+        },
+        ["dungeon"] = dungeon
     }
 end
 
-local DUNGEON_ROWS = {
-    -- Fake data
-    CreateRowData(375, "10:00", false),
-    CreateRowData(376, "12:00", false),
-    CreateRowData(377, "14:00", false),
-    CreateRowData(378, "16:00", false),
-    CreateRowData(379, "18:00", false),
-    CreateRowData(380, "11:00", false),
-    CreateRowData(381, "13:00", false),
-    CreateRowData(382, "15:00", false),
-    CreateRowData(375, "10:00", false),
-    CreateRowData(376, "12:00", false),
-    CreateRowData(377, "14:00", false),
-    CreateRowData(378, "16:00", false),
-    CreateRowData(379, "18:00", false),
-    CreateRowData(380, "11:00", false),
-    CreateRowData(381, "13:00", false),
-    CreateRowData(382, "15:00", false),
-    CreateRowData(375, "10:00", false),
-    CreateRowData(376, "12:00", false),
-    CreateRowData(377, "14:00", false),
-    CreateRowData(378, "16:00", false),
-    CreateRowData(379, "18:00", false),
-    CreateRowData(380, "11:00", false),
-    CreateRowData(381, "13:00", false),
-    CreateRowData(382, "15:00", false)
-}
-
 HBDungeonLayout = {}
-local DungeonTable
+local dungeonTable
+local rows = nil -- Lazy load our data
 
 -- Setup the Dungeon view into the supplied [frame].
 function HBDungeonLayout:Setup(frame)
-    DungeonTable = ScrollingTable:CreateST(DUNGEON_COLUMNS, NUM_ROWS, ROW_HEIGHT, nil, frame)
-    DungeonTable.head:SetHeight(25)
-    DungeonTable.frame:ClearAllPoints()
-    DungeonTable.frame:SetPoint("TOPLEFT", frame, "TOPLEFT")
-    DungeonTable.frame:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT")
-    DungeonTable:SetData(DUNGEON_ROWS)
+    dungeonTable = ScrollingTable:CreateST(DUNGEON_COLUMNS, NUM_ROWS, ROW_HEIGHT, nil, frame)
+    dungeonTable.head:SetHeight(25)
+    dungeonTable.frame:ClearAllPoints()
+    dungeonTable.frame:SetPoint("TOPLEFT", frame, "TOPLEFT")
+    dungeonTable.frame:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT")
+end
+
+-- Show the dungeon layout, loading data if needed
+function HBDungeonLayout:Show()
+    if (rows == nil) then
+        rows = {}
+        local history = HBDatabase:DungeonHistory()
+        for _, dungeon in ipairs(history) do
+            tinsert(rows, CreateRowData(dungeon))
+        end
+        dungeonTable:SetData(rows)
+    end
+    dungeonTable:Show()
 end

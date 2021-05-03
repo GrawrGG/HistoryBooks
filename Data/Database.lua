@@ -33,4 +33,8 @@ function HBDatabase:SaveRaid(raid)
     tinsert(RaidHistory, raid)
 end
 
+function HBDatabase:DungeonHistory()
+    return DungeonHistory
+end
+
 -- HistoryBooksDatabase

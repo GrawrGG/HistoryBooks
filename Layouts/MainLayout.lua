@@ -6,6 +6,7 @@ end
 
 function HBMainLayout:Show()
     HBFrame:Show()
+    HBDungeonLayout:Show()
 end
 
 function HBMainLayout:Hide()
