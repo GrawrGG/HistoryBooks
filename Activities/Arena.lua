@@ -3,7 +3,6 @@ HBArena = {
     CurrentMatch = nil,
     History = nil,
 }
-local arena = HBArena
 
 -- TODO Can we make these private 'instance' methods? Seems like they need to be defined in order otherwise.
 local function IsInArena()
