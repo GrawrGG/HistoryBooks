@@ -10,6 +10,7 @@ Embeds.xml
 # Utilities
 Util\Configuration.lua
 Util\Logger.lua
+Util\Time.lua
 
 # Tracked activities
 Activities\Arena.lua

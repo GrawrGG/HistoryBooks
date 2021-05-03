@@ -75,8 +75,7 @@ local function GetDungeonTimeColor(didCompleteInTime)
 end
 
 local function GetDungeonTime(duration)
-    -- TODO Format duration in hours:mins:seconds
-    return duration
+    return HBDurationToString(duration)
 end
 
 local function CreateRowData(dungeon)
