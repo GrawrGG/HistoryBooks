@@ -130,3 +130,7 @@ function HBDungeonLayout:Show()
     end
     dungeonTable:Show()
 end
+
+function HBDungeonLayout:Hide()
+    dungeonTable:Hide()
+end
