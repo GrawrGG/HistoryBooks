@@ -1,6 +1,7 @@
+-- Imports
 local ScrollingTable = LibStub("ScrollingTable")
-local logger = HBLogger
 
+-- Constants
 local ROW_HEIGHT = 40
 local ICON_PADDING = 4
 local NUM_ROWS = 12
@@ -32,6 +33,13 @@ local DUNGEON_COLUMNS = {
         ["DoCellUpdate"] = nil
     }
 }
+
+-- Locals
+local logger = HBLogger
+local dungeonTable
+local rows = nil -- Lazy load our data
+
+HBDungeonLayout = {}
 
 local function SetDungeonIcon(rowFrame, cellFrame, data, cols, row, realrow, column, fShow, table, ...)
     if (cellFrame.Background == nil) then
@@ -94,10 +102,6 @@ local function CreateRowData(dungeon)
         ["dungeon"] = dungeon
     }
 end
-
-HBDungeonLayout = {}
-local dungeonTable
-local rows = nil -- Lazy load our data
 
 -- Setup the Dungeon view into the supplied [frame].
 function HBDungeonLayout:Setup(frame)
