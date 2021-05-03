@@ -56,10 +56,10 @@ local function InitHBSlashCmd(arena, bg, dungeon, raid)
     locals.raid = raid
 end
 
-SlashCommands = {};
-SlashCommands.Init = InitHBSlashCmd
-SlashCommands.Handle = HandleHBSlashCmd
-SlashCommands.Register = RegisterHBSlashCmds
+HBSlashCommands = {};
+HBSlashCommands.Init = InitHBSlashCmd
+HBSlashCommands.Handle = HandleHBSlashCmd
+HBSlashCommands.Register = RegisterHBSlashCmds
 
 SLASH_HISTORYBOOKS1 = "/historybooks"
 SLASH_HISTORYBOOKS2 = "/hb"

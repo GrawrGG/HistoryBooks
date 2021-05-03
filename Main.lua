@@ -29,7 +29,7 @@ end
 
 local function RegisterSlashCmds()
     logger.log("HB: RegisterSlashCmds")
-    SlashCommands:Register()
+    HBSlashCommands:Register()
 end
 
 local function Init()
