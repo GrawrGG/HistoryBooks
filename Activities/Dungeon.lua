@@ -6,7 +6,7 @@ HBDungeon = {
 
 local function OnChallengeModeStart()
     logger.log("Challenge mode started!")
-    -- M+ instances only. 329 is Plaguefall. C_ChallengeMode.GetMapUIInfo to get timelimit, textures, etc.
+    -- M+ instances only. 379 is Plaguefall. C_ChallengeMode.GetMapUIInfo to get timelimit, textures, etc.
     local mapId = C_ChallengeMode.GetActiveChallengeMapID() 
     -- Sometimes the map didn't finish loading yet. We'll get another CHALLENGE_MODE_START event.
     if mapId == nil then
