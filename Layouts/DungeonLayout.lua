@@ -5,6 +5,18 @@ local ScrollingTable = LibStub("ScrollingTable")
 local ROW_HEIGHT = 40
 local ICON_PADDING = 4
 local NUM_ROWS = 12
+local COLOR_RED = { 
+    ["r"] = 1.0,
+    ["g"] = 0.0,
+    ["b"] = 0.0,
+    ["a"] = 1.0,
+}
+local COLOR_GREEN = { 
+    ["r"] = 0.0,
+    ["g"] = 1.0,
+    ["b"] = 0.0,
+    ["a"] = 1.0,
+}
 
 -- Column indexes
 local COL_INDEX_ICON = 1
@@ -60,18 +72,11 @@ local function GetDungeonName(dungeonID)
 end
 
 local function GetDungeonTimeColor(didCompleteInTime)
-    local red, green = 0.0, 0.0
     if didCompleteInTime then 
-        green = 1.0
+        return COLOR_GREEN
     else 
-        red = 1.0
+        return COLOR_RED
     end
-    return { 
-        ["r"] = red,
-        ["g"] = green,
-        ["b"] = 0.0,
-        ["a"] = 1.0,
-    }
 end
 
 local function GetDungeonTime(duration)
