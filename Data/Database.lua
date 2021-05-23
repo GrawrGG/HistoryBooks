@@ -1,20 +1,27 @@
 local ArenaHistory, BGHistory, DungeonHistory, RaidHistory
+local PlayerID
 HBDatabase = {}
 
 function HBDatabase:Init()
     if (HBDBFile == nil) then
-        HBDBFile = {
+        HBDBFile = {}
+    end
+    PlayerID = UnitGUID("player")
+    if (HBDBFile[PlayerID] == nil) then
+        HBDBFile[PlayerID] = {
             arena = {},
             bg = {},
             dungeon = {},
-            raid = {}
+            raid = {},
         }
     end
-    local dbFile = HBDBFile
-    ArenaHistory = dbFile.arena
-    BGHistory = dbFile.bg
-    DungeonHistory = dbFile.dungeon
-    RaidHistory = dbFile.raid
+    local playerDb = HBDBFile[PlayerID]
+    local playerName, _ = UnitName("player")
+    playerDb.playerName = playerName
+    ArenaHistory = playerDb.arena
+    BGHistory = playerDb.bg
+    DungeonHistory = playerDb.dungeon
+    RaidHistory = playerDb.raid
 end
 
 function HBDatabase:SaveArena(arena)
