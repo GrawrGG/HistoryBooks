@@ -1,5 +1,6 @@
+local MAX_ACTIVITIES_TO_PRINT = 10
+
 local logger = HBLogger
-local locals = {}
 
 SLASH_HISTORYBOOKS1 = "/historybooks"
 SLASH_HISTORYBOOKS2 = "/hb"
@@ -24,7 +25,18 @@ local function PrintBG()
 end
 
 local function PrintDungeon()
-  print("Dungeon support not implemented")
+  local dungeons = HBDatabase:DungeonHistory()
+  if (dungeons and dungeons[1]) then
+    for i = 1, MAX_ACTIVITIES_TO_PRINT do
+      local d = dungeons[i]
+      if (d) then
+        local duration = HBDurationToString(d.finishTime - d.enterTime)
+        print(d.instanceName .. " " .. duration)
+      end
+    end
+  else
+    print("No dungeons recorded.")
+  end
 end
 
 local function PrintRaid()
@@ -52,11 +64,4 @@ function HBSlashCommands:Register()
   if (SlashCmdList["HISTORYBOOKS"] == nil) then
     SlashCmdList["HISTORYBOOKS"] = HandleHBSlashCmd
   end
-end
-
-function HBSlashCommands:Init(arena, bg, dungeon, raid)
-  locals.arena = arena
-  locals.bg = bg
-  locals.dungeon = dungeon
-  locals.raid = raid
 end
