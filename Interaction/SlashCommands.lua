@@ -1,4 +1,6 @@
 local MAX_ACTIVITIES_TO_PRINT = 10
+local TEXT_COLOR_SUCCESS = "cFF00FF00" -- Green
+local TEXT_COLOR_FAILURE = "cFFFF0000" -- Red
 
 local logger = HBLogger
 
@@ -27,11 +29,19 @@ end
 local function PrintDungeon()
   local dungeons = HBDatabase:DungeonHistory()
   if (dungeons and dungeons[1]) then
-    for i = 1, MAX_ACTIVITIES_TO_PRINT do
+    local dungeonCount = #dungeons
+    local oldestDungeon = math.max(1, dungeonCount - MAX_ACTIVITIES_TO_PRINT)
+    for i = oldestDungeon, dungeonCount do
       local d = dungeons[i]
       if (d) then
         local duration = HBDurationToString(d.finishTime - d.enterTime)
-        print(d.instanceName .. " " .. duration)
+        local color
+        if (d.success) then
+          color = TEXT_COLOR_SUCCESS
+        else
+          color = TEXT_COLOR_FAILURE
+        end
+        print(d.instanceName .. " (" .. d.keyLevel .. ") |" .. color .. duration)
       end
     end
   else
