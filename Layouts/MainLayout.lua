@@ -8,58 +8,58 @@ local logger = HBLogger
 HBMainLayout = {}
 
 local function SetTitle()
-    HBFrame.TitleText:SetText("History Books")
+  HBFrame.TitleText:SetText("History Books")
 end
 
 local function SetupTabs()
-    PanelTemplates_SetNumTabs(HBFrame, NUM_TABS)
-    PanelTemplates_SetTab(HBFrame, DEFAULT_TAB)
+  PanelTemplates_SetNumTabs(HBFrame, NUM_TABS)
+  PanelTemplates_SetTab(HBFrame, DEFAULT_TAB)
 end
 
 local function HideAll()
-    HBDungeonLayout:Hide()
-    -- HBArenaLayout:Hide()
+  HBDungeonLayout:Hide()
+  -- HBArenaLayout:Hide()
 end
 
 local function ShowArena()
-    HideAll()
-    -- HBArenaLayout:Show()
+  HideAll()
+  -- HBArenaLayout:Show()
 end
 
 local function ShowDungeon()
-    HideAll()
-    HBDungeonLayout:Show()
+  HideAll()
+  HBDungeonLayout:Show()
 end
 
 function HBMainLayout:Setup()
-    SetTitle()
-    SetupTabs()
-    HBDungeonLayout:Setup(HBFrame.Content)
+  SetTitle()
+  SetupTabs()
+  HBDungeonLayout:Setup(HBFrame.Content)
 end
 
 function HBMainLayout:Show()
-    HBFrame:Show()
-    HBDungeonLayout:Show()
+  HBFrame:Show()
+  HBDungeonLayout:Show()
 end
 
 function HBMainLayout:Hide()
-    HBFrame:Hide()
+  HBFrame:Hide()
 end
 
 function HBMainLayout:ToggleVisible()
-    if (HBFrame:IsVisible()) then
-        self:Hide()
-    else 
-        self:Show()
-    end
+  if (HBFrame:IsVisible()) then
+    self:Hide()
+  else
+    self:Show()
+  end
 end
 
 function HBMainLayout:OnDungeonTabClick()
-    logger.log("Showing dungeons")
-    ShowDungeon()
+  logger.log("Showing dungeons")
+  ShowDungeon()
 end
 
 function HBMainLayout:OnArenaTabClick()
-    logger.log("Showing arenas")
-    ShowArena()
+  logger.log("Showing arenas")
+  ShowArena()
 end
