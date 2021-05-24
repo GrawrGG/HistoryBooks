@@ -7,6 +7,9 @@ ignore = {
   "11", -- Disable read/write warnings for globals
   "211/logger" -- Sometimes we define a local 'logger' var before we actually want to use it.
 }
+exclude_files = {
+  "Libs/**"
+}
 max_line_length = 160
 max_code_line_length = 160
 max_string_line_length = 160

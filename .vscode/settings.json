@@ -42,5 +42,8 @@
         // Globals from the WoW API not included in the WoW API Plugin
         "PanelTemplates_SetNumTabs",
         "PanelTemplates_SetTab",
+    ],
+    "Lua.workspace.ignoreDir": [
+        "Libs/**"
     ]
 }
