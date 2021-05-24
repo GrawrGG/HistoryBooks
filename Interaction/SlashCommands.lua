@@ -1,6 +1,11 @@
 local logger = HBLogger
 local locals = {}
 
+SLASH_HISTORYBOOKS1 = "/historybooks"
+SLASH_HISTORYBOOKS2 = "/hb"
+
+HBSlashCommands = {}
+
 local function PrintHelp()
   print("History Books slash commands:")
   print("/hb help (?) -- prints this help")
@@ -42,24 +47,16 @@ local function HandleHBSlashCmd(msg)
   end
 end
 
-local function RegisterHBSlashCmds()
+function HBSlashCommands:Register()
   logger.log("Registering slash commands")
   if (SlashCmdList["HISTORYBOOKS"] == nil) then
     SlashCmdList["HISTORYBOOKS"] = HandleHBSlashCmd
   end
 end
 
-local function InitHBSlashCmd(arena, bg, dungeon, raid)
+function HBSlashCommands:Init(arena, bg, dungeon, raid)
   locals.arena = arena
   locals.bg = bg
   locals.dungeon = dungeon
   locals.raid = raid
 end
-
-HBSlashCommands = {}
-HBSlashCommands.Init = InitHBSlashCmd
-HBSlashCommands.Handle = HandleHBSlashCmd
-HBSlashCommands.Register = RegisterHBSlashCmds
-
-SLASH_HISTORYBOOKS1 = "/historybooks"
-SLASH_HISTORYBOOKS2 = "/hb"

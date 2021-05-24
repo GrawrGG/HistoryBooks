@@ -1,7 +1,7 @@
 local logger = HBLogger
+local eventHandlers = {}
 
 HBEvents = CreateFrame("FRAME", "HistoryBooks")
-local eventHandlers = {}
 
 -- Because we can have multiple handlers for the same event, we provide a unique ID for each handler.
 function HBEvents:RegisterEventHandler(event, handler, id)
